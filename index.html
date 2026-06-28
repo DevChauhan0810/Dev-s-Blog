@@ -73,6 +73,19 @@
   .talk-contact th { text-align: left; font-weight: 700; padding: 6px 16px 6px 0; white-space: nowrap; vertical-align: top; }
   .talk-contact td { padding: 6px 0; }
 
+  /* Blog list + post body */
+  .wtable { border-collapse: collapse; width: 100%; font-family: var(--sans); font-size: 13px; margin: 12px 0 16px; }
+  .wtable th { background: var(--infobox-header); border: 1px solid var(--border); padding: 6px 10px; text-align: left; font-weight: 700; color: var(--text); }
+  .wtable td { border: 1px solid var(--border-light); padding: 7px 10px; color: var(--text); vertical-align: top; }
+  .wtable tr:hover td { background: #eaf3fb; }
+  .backlink { font-family: var(--sans); font-size: 13px; margin-bottom: 6px; }
+  .post-deck { font-family: var(--sans); font-size: 15px; font-style: italic; color: var(--muted); margin: 6px 0 18px; line-height: 1.5; }
+  .post-body { font-size: 15px; line-height: 1.85; }
+  .post-body p { margin-bottom: 16px; }
+  .post-body .h2 { font-family: var(--serif); font-size: 21px; font-weight: 400; border-bottom: 1px solid var(--border); padding-bottom: 4px; margin: 30px 0 12px; }
+  .post-body ul { margin: 0 0 16px 20px; }
+  .post-body li { margin-bottom: 9px; }
+
   /* Footer */
   #footer { background: var(--bg); border-top: 1px solid var(--border); padding: 14px 16px; margin-top: 24px; font-family: var(--sans); font-size: 12px; color: var(--muted); }
   #footer-inner { max-width: var(--content-max); margin: 0 auto; }
@@ -133,7 +146,7 @@
       <div class="portlet-title">Navigation</div>
       <ul>
         <li><a href="#" onclick="switchTab('article'); return false;">Home</a></li>
-        <li><a href="#" onclick="return false;">Blogs</a></li>
+        <li><a href="#" onclick="switchTab('blogs'); return false;">Blogs</a></li>
         <li><a href="#" onclick="return false;">Research Notes</a></li>
         <li><a href="#" onclick="return false;">Maths</a></li>
         <li><a href="#" onclick="return false;">Notes</a></li>
@@ -186,6 +199,98 @@
         </tbody>
       </table>
     </section>
+
+    <section id="panel-blogs" class="tab-panel">
+      <h1 class="article-title">Blogs</h1>
+      <div class="subtitle">From Dev's Knowledge Base, the free engineering encyclopedia</div>
+      <p class="lead">Long-form posts on systems, backend, and the things I learn from white papers.</p>
+      <table class="wtable">
+        <thead><tr><th style="width:150px;">Date</th><th>Title</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>28 June 2026</td>
+            <td><a href="#" onclick="switchTab('post-distsys'); return false;">You Use Distributed Systems 100 Times a Day — Here's What's Actually Happening</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="panel-post-distsys" class="tab-panel">
+      <p class="backlink"><a href="#" onclick="switchTab('blogs'); return false;">&#8592; All posts</a></p>
+      <h1 class="article-title">You Use Distributed Systems 100 Times a Day — Here's What's Actually Happening</h1>
+      <p class="post-deck">The invisible architecture keeping the internet alive, and why it's surprisingly hard to get right.</p>
+
+      <div class="post-body">
+        <p>You woke up this morning and checked your phone. Maybe you scrolled Instagram, fired off a WhatsApp message, checked your bank balance. None of those things feel complicated. Tap, load, done.</p>
+        <p>But behind each one of those taps, hundreds of computers across multiple countries are talking to each other, making decisions in milliseconds, and trying desperately not to mess anything up.</p>
+        <p>That's distributed systems. And once you understand what's happening under the hood, you'll never look at a loading spinner the same way again.</p>
+
+        <h2 class="h2">So What Even Is a Distributed System?</h2>
+        <p>Here's the simplest way to think about it.</p>
+        <p>When you type a URL into your browser and hit Enter, your laptop sends a request across the internet to some server sitting in a data center. The server receives it, does some work, and sends back a response. Your browser renders it as a webpage.</p>
+        <p>That right there — your browser and a web server talking over a network — is the most basic distributed system you use every day.</p>
+        <p>A distributed system is just multiple independent components, running on different machines, collaborating over a network to do something together. They can't share memory. They can't tap each other on the shoulder. All they can do is send messages.</p>
+        <p>Simple enough, right?</p>
+        <p>Except it's really, really not. And here's why.</p>
+
+        <h2 class="h2">The Thing That Makes Distributed Systems Hard: Partial Failure</h2>
+        <p>In your laptop, when something goes wrong, everything usually crashes together. App freezes, you force quit, done. Clean.</p>
+        <p>Distributed systems don't work that way.</p>
+        <p>Imagine a web app with three pieces: a frontend, a backend API, and a database. Now imagine the database crashes at 2am. What happens? The frontend is still up. The API is still running. But the database is gone.</p>
+        <p>Now every request that needs data is just… hanging. The API sends a query to the database, gets no response, and doesn't know what to do. Did the database receive the request before crashing? Did it save anything? Is it coming back in 5 seconds or 5 hours?</p>
+        <p>This is called <b>partial failure</b> — and it's the core beast of distributed systems.</p>
+        <p>In a single machine, you know things either work or they don't. In a distributed system, things can half-work in a thousand different ways. A component can be alive but slow. A network cable can drop every 10th packet. A server can receive your request but fail before sending a response back.</p>
+        <p>Every concept you'll learn in distributed systems — replication, consensus algorithms, timeouts, retries — exists because of partial failure. It's the problem everything else is trying to solve.</p>
+
+        <h2 class="h2">The CAP Theorem: You Can't Have Everything</h2>
+        <p>Here's a question worth thinking about.</p>
+        <p>Why does your bank sometimes show "service temporarily unavailable" — but Instagram never goes down, even during outages?</p>
+        <p>It's not because Instagram has better engineers (though they might). It's because they made different choices about what to prioritize when things go wrong.</p>
+        <p>This is what the CAP theorem is about. It says that any distributed system can only guarantee two of these three things simultaneously:</p>
+        <ul>
+          <li><b>Consistency</b> — every user sees the same data at the same time. If you write something, anyone who reads next sees your write.</li>
+          <li><b>Availability</b> — the system always responds to requests. It might not give you the freshest data, but it gives you something.</li>
+          <li><b>Partition Tolerance</b> — the system keeps working even when the network between nodes breaks down.</li>
+        </ul>
+        <p>Here's the catch: partition tolerance isn't really optional. Networks fail. It happens constantly — a misconfigured router, a cut cable, a thunderstorm near a data center. Any real distributed system has to handle it.</p>
+        <p>So in practice, you're not really picking two out of three. You're picking consistency or availability when the network breaks.</p>
+        <p>Your bank picks consistency. If two servers in different cities disagree about your account balance, the bank would rather say "sorry, try again" than risk showing you the wrong number. That's a CP system — Consistency + Partition Tolerance.</p>
+        <p>Instagram picks availability. If some servers are out of sync, you might see a post that shows 1,203 likes when it actually has 1,205. But you'll always be able to open the app. That's an AP system — Availability + Partition Tolerance. They'll sync up eventually.</p>
+        <p>Neither choice is wrong. They're just different answers to the same question: when things break, what matters most?</p>
+
+        <h2 class="h2">Consistency Is Not One Thing</h2>
+        <p>Once you understand CAP, you quickly realize "consistency" is not a single dial you turn on or off. It's a whole spectrum, and picking the right level for your use case is one of the most important decisions in distributed systems design.</p>
+        <p><b>Strong consistency</b> means every read reflects the most recent write. Period. No exceptions. This is what your bank uses for balances and transactions. Stale data is not acceptable — it's a bug, maybe even a legal problem.</p>
+        <p><b>Eventual consistency</b> means all nodes will eventually agree, but there might be a window where they don't. Your Instagram likes, your Twitter follower count, your Spotify play count — all of these are probably eventually consistent. Nobody cares if your post shows 999 likes for two seconds before updating to 1,000.</p>
+        <p><b>Causal consistency</b> is the interesting middle ground. Think about a group chat. If Alice sends "Can we move the meeting?" and Bob replies "Sure, 3pm works" — you should always see Alice's message before Bob's reply, even if they were processed on different servers. The cause must come before the effect. That ordering is guaranteed. But other unrelated messages might arrive out of order.</p>
+        <p>Most apps don't need strong consistency everywhere. The art is figuring out which parts of your system need it and which ones can relax.</p>
+
+        <h2 class="h2">Replication and Partitioning: How Systems Actually Scale</h2>
+        <p>Okay so we've established that distributed systems are built from multiple machines. But why multiple machines? Two reasons: reliability and scale.</p>
+        <p><b>Replication</b> means keeping copies of your data on multiple servers. If one server dies, another has the data. This is why Netflix can survive an AWS data center going dark — they replicate their content and services across multiple regions. Lose one, the others pick up the slack.</p>
+        <p>But replication creates a new problem: now you have multiple copies of the same data, and they need to stay in sync. Write to server A, and servers B and C need to know about it. Do that fast enough, you get strong consistency. Let it happen eventually, you get — you guessed it — eventual consistency.</p>
+        <p><b>Partitioning</b> (also called sharding) is a different strategy. Instead of copying all data to all nodes, you split the data across nodes. Node 1 handles users A–F, node 2 handles G–M, node 3 handles N–Z. Each piece of data lives in one place (or a few places, if you combine replication and partitioning).</p>
+        <p>This is how DynamoDB handles billions of records. This is how Cassandra scales to handle millions of writes per second. No single machine could hold all that data — so the data is sliced up and spread out.</p>
+        <p>The tricky part? Figuring out how to split the data evenly, and what happens when you need to add or remove a node. (Spoiler: there's a beautiful algorithm called consistent hashing that solves this — more on that in a future post.)</p>
+
+        <h2 class="h2">Time and Consensus: The Problem Nobody Talks About Enough</h2>
+        <p>Here's something that will genuinely mess with your head.</p>
+        <p><b>There is no global clock in a distributed system.</b></p>
+        <p>Your laptop has a clock. The server in Virginia has a clock. The server in Singapore has a clock. But they're all slightly different, drifting at different rates, synced to different time sources. Network Time Protocol (NTP) helps, but even NTP has milliseconds of drift.</p>
+        <p>Why does this matter? Because in a distributed system, events happen on different machines. If server A writes a value at "10:00:00.001" and server B writes a different value at "10:00:00.002" — which one happened first? You'd think the timestamps tell you. But if the clocks disagree by 5 milliseconds, you don't actually know.</p>
+        <p>This isn't a theoretical problem. It causes real data corruption in real systems.</p>
+        <p>Solving this requires either logical clocks (algorithms that track causality instead of time) or, in Google's case, literal GPS receivers and atomic clocks in every data center to give TrueTime — an API that returns not a single timestamp, but a time interval: "the actual time is somewhere between X and Y, guaranteed." That's how Spanner achieves global consistency. Wild.</p>
+        <p>The other piece of this puzzle is consensus — getting multiple nodes to agree on a single value even when some of them might be down or out of sync. This is the hardest problem in distributed systems. Algorithms like Raft and Paxos exist to solve it. Kubernetes stores all its cluster state using etcd, which runs Raft under the hood. Every time you kubectl apply something, a consensus algorithm is running.</p>
+
+        <h2 class="h2">Three Things Beginners Always Get Wrong</h2>
+        <p>Before you go, here are three assumptions almost every engineer makes when they first touch distributed systems — all of them wrong.</p>
+        <ul>
+          <li><b>"The network is reliable."</b> It isn't. Packets drop. Connections reset. Routers reboot. A request you sent might arrive twice, or never, or arrive out of order. Design for this from day one, not as an afterthought.</li>
+          <li><b>"Latency is zero."</b> Every network hop adds time. A function call inside your process takes nanoseconds. A call to another service takes milliseconds. Chain ten microservices together and you've added hundreds of milliseconds before your actual business logic even runs. This surprises people constantly in production.</li>
+          <li><b>"If I didn't get a response, the request failed."</b> This one causes real bugs. A timeout doesn't mean the server didn't process your request. It might have — you just didn't get the acknowledgment back. Clicking "place order" twice because the first click seemed to hang? You might have just ordered twice. Systems need to be designed to handle this: the concept is called idempotency, and it's critical.</li>
+        </ul>
+      </div>
+    </section>
   </main>
 </div>
 
@@ -201,8 +306,9 @@
     document.querySelectorAll('.tab-panel').forEach(function (p) { p.classList.remove('active'); });
     document.querySelectorAll('#tabs .tab').forEach(function (t) { t.classList.remove('active'); });
     var panel = document.getElementById('panel-' + name);
-    var tab = document.getElementById('tab-' + name);
     if (panel) panel.classList.add('active');
+    // Talk shows the Talk tab; every content page (home, blogs, a post) keeps the Article tab active.
+    var tab = document.getElementById(name === 'talk' ? 'tab-talk' : 'tab-article');
     if (tab) tab.classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
