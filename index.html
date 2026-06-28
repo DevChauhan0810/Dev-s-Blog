@@ -54,6 +54,15 @@
   .subtitle { font-family: var(--sans); font-size: 13px; color: var(--muted); font-style: italic; margin-bottom: 16px; }
   .lead { font-size: 15px; line-height: 1.8; margin-bottom: 14px; }
 
+  /* Infobox */
+  .infobox { float: right; clear: right; margin: 4px 0 16px 24px; background: var(--bg); border: 1px solid var(--border); font-family: var(--sans); font-size: 13px; width: 250px; border-collapse: collapse; }
+  .infobox caption { background: var(--infobox-header); font-weight: 700; font-size: 14px; padding: 6px 8px; border-bottom: 1px solid var(--border); caption-side: top; }
+  .infobox th, .infobox td { padding: 6px 8px; vertical-align: top; border-top: 1px solid var(--border-light); font-size: 12.5px; line-height: 1.45; }
+  .infobox th { background: var(--bg); font-weight: 700; text-align: left; white-space: nowrap; width: 92px; }
+  .infobox .infobox-section { background: var(--infobox-header); text-align: center; font-weight: 700; font-size: 12px; letter-spacing: .3px; }
+  .infobox-avatar { width: 90px; height: 90px; border-radius: 50%; background: var(--infobox-header); border: 1px solid var(--border); display: inline-flex; align-items: center; justify-content: center; font-size: 34px; font-weight: 700; color: var(--link); font-family: var(--serif); }
+  .infobox-cap { font-size: 11px; color: var(--muted); font-style: italic; margin-top: 6px; display: block; }
+
   /* Socials line */
   .socials { border-top: 1px solid var(--border-light); margin-top: 22px; padding-top: 12px; font-family: var(--sans); font-size: 14px; }
   .socials a { font-weight: 700; margin-right: 18px; }
@@ -150,6 +159,24 @@
   <main id="content">
     <article id="panel-article" class="tab-panel active">
     <h1 class="article-title">Dev's Blog</h1>
+
+    <table class="infobox">
+      <caption>Dev Chauhan</caption>
+      <tbody>
+        <tr>
+          <td colspan="2" style="text-align:center;padding:12px 8px 8px;border-top:none;">
+            <div class="infobox-avatar">D</div>
+            <span class="infobox-cap">Dev Chauhan</span>
+          </td>
+        </tr>
+        <tr><th>Education</th><td>Northeastern University<br>(M.S. Computer Science)</td></tr>
+        <tr><th>Focus</th><td>Backend, cloud &amp; distributed systems</td></tr>
+        <tr><th>Interests</th><td>Machine learning, systems design</td></tr>
+        <tr><td colspan="2" class="infobox-section">Experience</td></tr>
+        <tr><td colspan="2" style="text-align:left;"><b>The Syntax Studio</b><br><span style="color:var(--muted);">Feb 2025 – May 2025</span></td></tr>
+        <tr><td colspan="2" style="text-align:left;"><b>Beetonz Infotech</b><br><span style="color:var(--muted);">May 2024 – Jul 2024</span></td></tr>
+      </tbody>
+    </table>
 
     <p class="lead">
       Hi, <b>Dev Chauhan</b> here.
