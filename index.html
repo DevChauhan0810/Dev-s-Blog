@@ -31,19 +31,12 @@
   #logo-wrap svg { width: 50px; height: 50px; }
   #site-name { font-size: 16px; font-weight: 700; color: var(--text); font-family: var(--serif); }
   #site-tagline { font-size: 11px; color: var(--muted); font-style: italic; }
-  #search-wrap { flex: 1; max-width: 340px; margin-left: auto; }
-  #search { width: 100%; padding: 6px 10px; border: 1px solid var(--border); border-radius: 2px; font-size: 13px; font-family: inherit; background: var(--white); color: var(--text); outline: none; }
-  #search:focus { border-color: var(--link); box-shadow: 0 0 0 2px rgba(51,102,204,.15); }
-  #search::placeholder { color: var(--muted); font-style: italic; }
 
   /* Tab strip */
   #tabs { background: var(--white); border-bottom: 1px solid var(--border); font-family: var(--sans); }
   #tabs-inner { max-width: var(--content-max); margin: 0 auto; padding: 0 16px; display: flex; align-items: flex-end; }
   .tab { padding: 6px 14px 7px; font-size: 13px; color: var(--link); border: 1px solid var(--border); border-bottom: none; border-radius: 3px 3px 0 0; margin: 0 2px -1px 0; background: #eaecf0; }
   .tab.active { background: var(--white); color: var(--text); border-bottom-color: var(--white); }
-  .tab-spacer { flex: 1; }
-  .tab-tools { display: flex; gap: 10px; align-items: flex-end; padding-bottom: 8px; font-size: 12px; }
-  .tab-tools a { color: var(--muted); }
 
   /* Layout */
   #layout { max-width: var(--content-max); margin: 0 auto; display: flex; align-items: flex-start; padding: 0 16px; }
@@ -118,9 +111,6 @@
         <div id="site-tagline">the free engineering encyclopedia</div>
       </div>
     </div>
-    <div id="search-wrap">
-      <input id="search" type="search" placeholder="Search Dev's Knowledge Base..." aria-label="Search">
-    </div>
   </div>
 </header>
 
@@ -129,12 +119,6 @@
   <div id="tabs-inner">
     <a class="tab active" id="tab-article" href="#" onclick="switchTab('article'); return false;">Article</a>
     <a class="tab" id="tab-talk" href="#" onclick="switchTab('talk'); return false;">Talk</a>
-    <div class="tab-spacer"></div>
-    <div class="tab-tools">
-      <a href="#" onclick="switchTab('article'); return false;">Read</a>
-      <a href="#" onclick="return false;">Edit</a>
-      <a href="#" onclick="return false;">View history</a>
-    </div>
   </div>
 </nav>
 
@@ -166,7 +150,6 @@
   <main id="content">
     <article id="panel-article" class="tab-panel active">
     <h1 class="article-title">Dev's Blog</h1>
-    <div class="subtitle">From Dev's Knowledge Base, the free engineering encyclopedia</div>
 
     <p class="lead">
       Hi, <b>Dev Chauhan</b> here.
@@ -202,7 +185,6 @@
 
     <section id="panel-blogs" class="tab-panel">
       <h1 class="article-title">Blogs</h1>
-      <div class="subtitle">From Dev's Knowledge Base, the free engineering encyclopedia</div>
       <p class="lead">Long-form posts on systems, backend, and the things I learn from white papers.</p>
       <table class="wtable">
         <thead><tr><th style="width:150px;">Date</th><th>Title</th></tr></thead>
